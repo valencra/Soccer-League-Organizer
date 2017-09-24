@@ -1,9 +1,9 @@
 package com.teamtreehouse.menu;
 
 public interface MenuInterface {
-  void displayOptions();
+    void displayOptions();
 
-  int getSelectedOption();
-  
+//  int getSelectedOption();
+
 //  void runSelectedOption();
 }
