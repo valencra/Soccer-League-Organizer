@@ -12,6 +12,10 @@ public class League {
 
     public void addTeam(Team team) {
         this.teams.add(team);
+        this.displayTeams();
+    }
+
+    public void displayTeams() {
         System.out.println("Current teams on the league: ");
         int counter = 0;
         for (Team entry: teams) {

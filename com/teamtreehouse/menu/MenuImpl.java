@@ -1,21 +1,24 @@
 package com.teamtreehouse.menu;
 
 import com.teamtreehouse.model.League;
+import com.teamtreehouse.model.Player;
 import com.teamtreehouse.model.Team;
 
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Arrays;
+import java.util.Set;
 
 public class MenuImpl implements MenuInterface {
-    private  League league;
+    private League league;
+    private Set<Player> playesrSet;
     private BufferedReader br;
 
-    public MenuImpl(League league) {
+    public MenuImpl(League league, Set<Player> playersSet) {
         this.league = league;
+        this.playesrSet = playersSet;
         this.br = new BufferedReader(new InputStreamReader(System.in));
     }
 
@@ -35,7 +38,7 @@ public class MenuImpl implements MenuInterface {
 
     @Override
     public int getSelectedOption() throws IOException {
-        System.out.print("Enter choice: ");
+        System.out.print("Enter option number: ");
         int option = Integer.parseInt(br.readLine());
         System.out.println("");
         return option;
@@ -54,6 +57,10 @@ public class MenuImpl implements MenuInterface {
                 break;
             case 2:
                 System.out.println("Adding players to a team...");
+                this.league.displayTeams();
+                System.out.println("Enter team number: ");
+                int teamIdx = Integer.parseInt(br.readLine());
+                this.displayPlayersSet();
                 break;
             case 3:
                 System.out.println("Removing players from a team...");
@@ -72,5 +79,13 @@ public class MenuImpl implements MenuInterface {
         this.league.addTeam(team);
     }
 
-
+    @Override
+    public void displayPlayersSet() {
+        int counter = 0;
+        System.out.println("Master set of players: ");
+        for (Player player : this.playesrSet) {
+            counter++;
+            System.out.printf("%d. %s", counter, player);
+        }
+    }
 }
