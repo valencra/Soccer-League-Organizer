@@ -27,8 +27,24 @@ public class MenuImpl implements MenuInterface {
         int option = Integer.parseInt(br.readLine());
         return option;
     }
-//  
-//  public void runSelectedOption() {
-//  
-//  }
+
+    public void runSelectedOption(int option) {
+        switch (option) {
+            case 1:
+                System.out.println("Creating a new team...");
+                break;
+            case 2:
+                System.out.println("Adding players to a team...");
+                break;
+            case 3:
+                System.out.println("Removing players from a team...");
+                break;
+            case 4:
+                System.out.println("Exiting program...");
+                break;
+            default:
+                System.out.println("--- INVALID OPTION ---");
+        }
+    }
+
 }

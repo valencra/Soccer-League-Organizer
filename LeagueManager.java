@@ -23,6 +23,8 @@ public class LeagueManager {
             }
 
             // run selected option
+            menu.runSelectedOption(option);
+
         } while (option != 4);
 
     }
