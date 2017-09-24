@@ -7,5 +7,7 @@ public interface MenuInterface {
 
     int getSelectedOption() throws IOException;
 
-    void runSelectedOption(int option);
+    void runSelectedOption(int option) throws IOException;
+
+    void createNewTeam(String teamName, String coach);
 }
