@@ -14,10 +14,10 @@ public class LeagueManager {
         Player[] players = Players.load();
         System.out.printf("There are currently %d registered players.%n", players.length);
 
-        League league = new League();
         List<Player> playersList = Arrays.asList(players);
         Set<Player> playersSet = new TreeSet<Player>(playersList);
-        MenuImpl menu = new MenuImpl(league, playersSet);
+        League league = new League(playersSet);
+        MenuImpl menu = new MenuImpl(league);
         int option = 0;
         do {
             // display options

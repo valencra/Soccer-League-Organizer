@@ -70,8 +70,8 @@ public class Player implements Comparable<Player>, Serializable {
     @Override
     public String toString() {
         return String.format(
-                "Last Name: %s | First Name: %s | Height(in.): %d | Previous Experience: %s%n",
-                lastName, firstName, heightInInches, previousExperience
+                "%-20s | %-11d | %-20s",
+                lastName + ", " + firstName, heightInInches, previousExperience
         );
     }
 }

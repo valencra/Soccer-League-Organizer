@@ -7,18 +7,17 @@ import com.teamtreehouse.model.Team;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Collections;
 import java.util.List;
 import java.util.Arrays;
 import java.util.Set;
 
 public class MenuImpl implements MenuInterface {
     private League league;
-    private Set<Player> playesrSet;
     private BufferedReader br;
 
-    public MenuImpl(League league, Set<Player> playersSet) {
+    public MenuImpl(League league) {
         this.league = league;
-        this.playesrSet = playersSet;
         this.br = new BufferedReader(new InputStreamReader(System.in));
     }
 
@@ -46,6 +45,7 @@ public class MenuImpl implements MenuInterface {
 
     @Override
     public void runSelectedOption(int option) throws IOException{
+        int teamIdx;
         switch (option) {
             case 1:
                 System.out.println("Creating a new team...");
@@ -53,17 +53,21 @@ public class MenuImpl implements MenuInterface {
                 String teamName = this.br.readLine();
                 System.out.printf("Enter coach: ");
                 String coach = this.br.readLine();
-                this.createNewTeam(teamName, coach);
+                this.league.createNewTeam(teamName, coach);
                 break;
             case 2:
                 System.out.println("Adding players to a team...");
                 this.league.displayTeams();
-                System.out.println("Enter team number: ");
-                int teamIdx = Integer.parseInt(br.readLine());
-                this.displayPlayersSet();
+                System.out.print("Enter team number: ");
+                teamIdx = Integer.parseInt(br.readLine());
+                this.league.displayPlayersSet();
                 break;
             case 3:
                 System.out.println("Removing players from a team...");
+                this.league.displayTeams();
+                System.out.print("Enter team number: ");
+                teamIdx = Integer.parseInt(br.readLine());
+                this.league.displayPlayersSet();
                 break;
             case 4:
                 System.out.println("Exiting program...");
@@ -73,19 +77,4 @@ public class MenuImpl implements MenuInterface {
         }
     }
 
-    @Override
-    public void createNewTeam(String teamName, String coach) {
-        Team team = new Team(teamName, coach);
-        this.league.addTeam(team);
-    }
-
-    @Override
-    public void displayPlayersSet() {
-        int counter = 0;
-        System.out.println("Master set of players: ");
-        for (Player player : this.playesrSet) {
-            counter++;
-            System.out.printf("%d. %s", counter, player);
-        }
-    }
 }

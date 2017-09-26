@@ -14,21 +14,9 @@ public class Team implements Comparable{
         this.players = new TreeSet<Player>();
     }
 
-    public void displayPlayers() {
-        int counter = 0;
-        for (Player player : this.players) {
-            counter++;
-            System.out.printf(
-                    "%d. %s",
-                    counter,
-                    player
-            );
-        }
-    }
-
     @Override
     public String toString() {
-        return String.format("Team name: %s | Coach: %s", this.teamName, this.coach);
+        return String.format("%-25s | %-25s", this.teamName, this.coach);
     }
 
     @Override
