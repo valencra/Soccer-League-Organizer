@@ -56,6 +56,11 @@ public class League {
         }
     }
 
+    public void addPlayer(Player player) {
+        this.availablePlayers.add(player);
+        Collections.sort(this.availablePlayers);
+    }
+
     public void removePlayer(int playerIdx) {
         this.availablePlayers.remove(playerIdx);
     }

@@ -96,22 +96,32 @@ public class MenuImpl implements MenuInterface {
                             "Cannot add a new player. The selected team already has the maximum number of players."
                     );
                 }
-                // TO-DO: add team report
                 break;
             case 3:
                 System.out.println("Removing players from a team...");
                 // select team
                 this.league.displayTeams();
                 System.out.print("Enter team number: ");
-                teamIdx = Integer.parseInt(br.readLine());
+                teamIdx = Integer.parseInt(br.readLine()) - 1;
                 selectedTeam = this.league.getTeam(teamIdx);
                 System.out.printf(
-                        "Selected Team: %s with coach %s%n",
+                        "Selected team: %s with coach %s%n",
                         selectedTeam.getTeamName(),
                         selectedTeam.getCoach()
                 );
                 // select player
-                selectedTeam.
+                selectedTeam.displayPlayers();
+                System.out.print("Enter player number: ");
+                playerIdx = Integer.parseInt(br.readLine()) - 1;
+                selectedPlayer = selectedTeam.getPlayer(playerIdx); //
+                System.out.printf(
+                        "Selected player: %s, %s%n",
+                        selectedPlayer.getLastName(),
+                        selectedPlayer.getFirstName()
+                );
+                // implement remove and add logic for respective classes
+                selectedTeam.removePlayer(playerIdx);
+                this.league.addPlayer(selectedPlayer);
                 break;
 
             case 4:

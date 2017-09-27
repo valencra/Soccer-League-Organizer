@@ -25,15 +25,17 @@ public class Team implements Comparable{
         return this.players.size();
     }
 
+    public Player getPlayer(int playerIdx) {
+        return this.players.get(playerIdx);
+    }
+
     public void addPlayer(Player player) {
         this.players.add(player);
-        System.out.printf(
-                "Added %s, %s to team %s with coach %s%n",
-                player.getLastName(),
-                player.getFirstName(),
-                this.teamName,
-                this.coach
-        );
+        this.displayPlayers();
+    }
+
+    public void removePlayer(int playerIdx) {
+        this.players.remove(playerIdx);
         this.displayPlayers();
     }
 
