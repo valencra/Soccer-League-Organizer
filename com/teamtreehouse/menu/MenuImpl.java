@@ -120,8 +120,15 @@ public class MenuImpl implements MenuInterface {
                         selectedPlayer.getFirstName()
                 );
                 // implement remove and add logic for respective classes
-                selectedTeam.removePlayer(playerIdx);
-                this.league.addPlayer(selectedPlayer);
+                if (selectedTeam.getPlayerCount() > 0) {
+                    selectedTeam.removePlayer(playerIdx);
+                    this.league.addPlayer(selectedPlayer);
+                }
+                else {
+                    System.out.println(
+                            "Cannot remove a player. The selected team has no players."
+                    );
+                }
                 break;
 
             case 4:
