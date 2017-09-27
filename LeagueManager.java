@@ -4,19 +4,16 @@ import com.teamtreehouse.model.Players;
 import com.teamtreehouse.menu.MenuImpl;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class LeagueManager {
     public static void main(String[] args) {
         Player[] players = Players.load();
         System.out.printf("There are currently %d registered players.%n", players.length);
 
-        List<Player> playersList = Arrays.asList(players);
-        Set<Player> playersSet = new TreeSet<Player>(playersList);
-        League league = new League(playersSet);
+        List<Player> availablePlayers = new ArrayList<Player>(Arrays.asList(players));
+        Collections.sort(availablePlayers);
+        League league = new League(availablePlayers);
         MenuImpl menu = new MenuImpl(league);
         int option = 0;
         do {

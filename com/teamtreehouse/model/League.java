@@ -1,21 +1,20 @@
 package com.teamtreehouse.model;
 
-import java.util.Collections;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class League {
-    private Set<Team> teams;
-    private Set<Player> availablePlayers;
+    private List<Team> teams;
+    private List<Player> availablePlayers;
 
-    public League(Set<Player> playersSet) {
-        this.teams = new TreeSet<Team>();
-        this.availablePlayers = playersSet;
+    public League(List<Player> availablePlayers) {
+        this.teams = new ArrayList<>();
+        this.availablePlayers = availablePlayers;
     }
 
     public void createNewTeam(String teamName, String coach) {
         Team team = new Team(teamName, coach);
         this.teams.add(team);
+        Collections.sort(this.teams);
         this.displayTeams();
     }
 
@@ -35,7 +34,11 @@ public class League {
         }
     }
 
-    public void displayPlayersSet() {
+    public Team getTeam(int teamIdx) {
+        return this.teams.get(teamIdx);
+    }
+
+    public void displayPlayers() {
         int counter = 0;
         System.out.println("Available players: ");
         System.out.println(String.join("", Collections.nCopies(62, "-")));
@@ -50,5 +53,13 @@ public class League {
             counter++;
             System.out.printf("%03d. %s%n", counter, player);
         }
+    }
+
+    public void removePlayerFromAvailablePlayers(int playerIdx) {
+        this.availablePlayers.remove(playerIdx);
+    }
+
+    public Player getPlayer(int playerIdx) {
+        return this.availablePlayers.get(playerIdx);
     }
 }

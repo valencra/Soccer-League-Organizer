@@ -46,6 +46,10 @@ public class MenuImpl implements MenuInterface {
     @Override
     public void runSelectedOption(int option) throws IOException{
         int teamIdx;
+        Team selectedTeam;
+        int playerIdx;
+        Player selectedPlayer;
+
         switch (option) {
             case 1:
                 System.out.println("Creating a new team...");
@@ -55,24 +59,63 @@ public class MenuImpl implements MenuInterface {
                 String coach = this.br.readLine();
                 this.league.createNewTeam(teamName, coach);
                 break;
+
             case 2:
                 System.out.println("Adding players to a team...");
+                // select team
                 this.league.displayTeams();
                 System.out.print("Enter team number: ");
-                teamIdx = Integer.parseInt(br.readLine());
-                this.league.displayPlayersSet();
+                teamIdx = Integer.parseInt(br.readLine()) - 1;
+                selectedTeam = this.league.getTeam(teamIdx);
+                System.out.printf(
+                        "Selected team: %s with coach %s%n",
+                        selectedTeam.getTeamName(),
+                        selectedTeam.getCoach()
+                );
+                // select player
+                this.league.displayPlayers();
+                System.out.print("Enter player number: ");
+                playerIdx = Integer.parseInt(br.readLine()) - 1;
+                selectedPlayer = this.league.getPlayer(playerIdx);
+                System.out.printf(
+                        "Selected player: %s, %s%n",
+                        selectedPlayer.getLastName(),
+                        selectedPlayer.getFirstName()
+                );
+                if (selectedTeam.getPlayerCount() < 11) {
+                    this.league.removePlayerFromAvailablePlayers(playerIdx);
+                    selectedTeam.addPlayer(selectedPlayer);
+                }
+                else {
+                    System.out.println(
+                            "Cannot add a new player. The selected team already has the maximum number of players."
+                    );
+                }
                 break;
+
             case 3:
                 System.out.println("Removing players from a team...");
                 this.league.displayTeams();
                 System.out.print("Enter team number: ");
                 teamIdx = Integer.parseInt(br.readLine());
-                this.league.displayPlayersSet();
+                selectedTeam = this.league.getTeam(teamIdx);
+                System.out.printf(
+                        "Selected Team: %s with coach %s%n",
+                        selectedTeam.getTeamName(),
+                        selectedTeam.getCoach()
+                );
+                this.league.displayPlayers();
                 break;
+
             case 4:
                 System.out.println("Exiting program...");
                 break;
+
             default:
+                teamIdx = -1;
+                selectedTeam =null;
+                playerIdx = -1;
+                selectedPlayer = null;
                 System.out.println("--- INVALID OPTION ---");
         }
     }
