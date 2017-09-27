@@ -7,10 +7,8 @@ import com.teamtreehouse.model.Team;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Collections;
 import java.util.List;
 import java.util.Arrays;
-import java.util.Set;
 
 public class MenuImpl implements MenuInterface {
     private League league;
@@ -53,11 +51,18 @@ public class MenuImpl implements MenuInterface {
         switch (option) {
             case 1:
                 System.out.println("Creating a new team...");
-                System.out.print("Enter team name: ");
-                String teamName = this.br.readLine();
-                System.out.printf("Enter coach: ");
-                String coach = this.br.readLine();
-                this.league.createNewTeam(teamName, coach);
+                if (this.league.getPlayerCount() > 0) {
+                    System.out.print("Enter team name: ");
+                    String teamName = this.br.readLine();
+                    System.out.printf("Enter coach: ");
+                    String coach = this.br.readLine();
+                    this.league.createNewTeam(teamName, coach);
+                }
+                else {
+                    System.out.println(
+                            "Cannot create a new team. The league already has the maximum number of teams."
+                    );
+                }
                 break;
 
             case 2:
@@ -83,7 +88,7 @@ public class MenuImpl implements MenuInterface {
                         selectedPlayer.getFirstName()
                 );
                 if (selectedTeam.getPlayerCount() < 11) {
-                    this.league.removePlayerFromAvailablePlayers(playerIdx);
+                    this.league.removePlayer(playerIdx);
                     selectedTeam.addPlayer(selectedPlayer);
                 }
                 else {
@@ -91,8 +96,8 @@ public class MenuImpl implements MenuInterface {
                             "Cannot add a new player. The selected team already has the maximum number of players."
                     );
                 }
+                // TO-DO: add team report
                 break;
-
             case 3:
                 System.out.println("Removing players from a team...");
                 this.league.displayTeams();

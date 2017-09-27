@@ -55,11 +55,15 @@ public class League {
         }
     }
 
-    public void removePlayerFromAvailablePlayers(int playerIdx) {
+    public void removePlayer(int playerIdx) {
         this.availablePlayers.remove(playerIdx);
     }
 
     public Player getPlayer(int playerIdx) {
         return this.availablePlayers.get(playerIdx);
+    }
+
+    public int getPlayerCount() {
+        return this.availablePlayers.size();
     }
 }
