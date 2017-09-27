@@ -100,6 +100,7 @@ public class MenuImpl implements MenuInterface {
                 break;
             case 3:
                 System.out.println("Removing players from a team...");
+                // select team
                 this.league.displayTeams();
                 System.out.print("Enter team number: ");
                 teamIdx = Integer.parseInt(br.readLine());
@@ -109,7 +110,8 @@ public class MenuImpl implements MenuInterface {
                         selectedTeam.getTeamName(),
                         selectedTeam.getCoach()
                 );
-                this.league.displayPlayers();
+                // select player
+                selectedTeam.
                 break;
 
             case 4:

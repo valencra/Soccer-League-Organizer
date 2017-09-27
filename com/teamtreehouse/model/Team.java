@@ -27,7 +27,6 @@ public class Team implements Comparable{
 
     public void addPlayer(Player player) {
         this.players.add(player);
-        this.sortPlayersByHeight();
         System.out.printf(
                 "Added %s, %s to team %s with coach %s%n",
                 player.getLastName(),
@@ -35,7 +34,7 @@ public class Team implements Comparable{
                 this.teamName,
                 this.coach
         );
-        this.displayTeamReport();
+        this.displayPlayers();
     }
 
     private void sortPlayersByHeight() {
@@ -48,9 +47,30 @@ public class Team implements Comparable{
         });
     }
 
-    public void displayTeamReport() {
+    public void displayPlayers() {
+        // sort by last name and first name, then display list
+        Collections.sort(this.players);
         int counter = 0;
-        System.out.println("Team Report:");
+        System.out.println("Team Players: ");
+        System.out.println(String.join("", Collections.nCopies(62, "-")));
+        System.out.printf(
+                "%-26s|%-13s|%-20s%n",
+                "Player",
+                " Height(in.)",
+                " Previous Experience"
+        );
+        System.out.println(String.join("", Collections.nCopies(62, "-")));
+        for (Player player : this.players) {
+            counter++;
+            System.out.printf("%03d. %s%n", counter, player);
+        }
+    }
+
+    public void displayTeamReport() {
+        // sort by height, then display list
+        this.sortPlayersByHeight();
+        int counter = 0;
+        System.out.println("Team Report (players sorted by height):");
         System.out.println(String.join("", Collections.nCopies(62, "-")));
         System.out.printf(
                 "%-26s|%-13s|%-20s%n",

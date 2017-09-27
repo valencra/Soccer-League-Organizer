@@ -14,11 +14,11 @@ public class League {
     public void createNewTeam(String teamName, String coach) {
         Team team = new Team(teamName, coach);
         this.teams.add(team);
-        Collections.sort(this.teams);
         this.displayTeams();
     }
 
     public void displayTeams() {
+        Collections.sort(this.teams);
         System.out.println("Current teams on the league: ");
         System.out.println(String.join("", Collections.nCopies(58, "-")));
         System.out.printf(
@@ -39,6 +39,7 @@ public class League {
     }
 
     public void displayPlayers() {
+        Collections.sort(this.availablePlayers);
         int counter = 0;
         System.out.println("Available players: ");
         System.out.println(String.join("", Collections.nCopies(62, "-")));
