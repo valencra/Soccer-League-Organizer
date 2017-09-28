@@ -39,16 +39,6 @@ public class Team implements Comparable{
         this.displayPlayers();
     }
 
-    private void sortPlayersByHeight() {
-        Collections.sort(this.players, new Comparator<Player>(){
-            public int compare(Player current, Player next){
-                if(current.getHeightInInches() == next.getHeightInInches())
-                    return 0;
-                return current.getHeightInInches() < next.getHeightInInches() ? -1 : 1;
-            }
-        });
-    }
-
     public void displayPlayers() {
         // sort by last name and first name, then display list
         Collections.sort(this.players);
@@ -69,10 +59,19 @@ public class Team implements Comparable{
     }
 
     public void displayTeamReport() {
-        // sort by height, then display list
-        this.sortPlayersByHeight();
-        int counter = 0;
-        System.out.println("Team Report (players sorted by height):");
+        // generate height-players map
+        Map<Integer, List<Player>> playersGroupedByHeight = new TreeMap<>();
+        for (Player player : this.players) {
+            Integer height = player.getHeightInInches();
+            List<Player> playerList = playersGroupedByHeight.get(height);
+            if (playerList == null) {
+                playersGroupedByHeight.put(height, new ArrayList<>());
+            }
+            playersGroupedByHeight.get(height).add(player);
+        }
+
+        // display team report
+        System.out.println("Team Report (players grouped by height):");
         System.out.println(String.join("", Collections.nCopies(62, "-")));
         System.out.printf(
                 "%-26s|%-13s|%-20s%n",
@@ -81,9 +80,16 @@ public class Team implements Comparable{
                 " Previous Experience"
         );
         System.out.println(String.join("", Collections.nCopies(62, "-")));
-        for (Player player : this.players) {
-            counter++;
-            System.out.printf("%03d. %s%n", counter, player);
+        // iterate through heights
+        for (Integer height : playersGroupedByHeight.keySet()) {
+            List<Player> playerList = playersGroupedByHeight.get(height);
+            int counter = 0;
+            // iterate through players with the same height
+            for (Player player : playerList) {
+                counter++;
+                System.out.printf("%03d. %s%n", counter, player);
+            }
+            System.out.println(String.join("", Collections.nCopies(62, "-")));
         }
     }
 
