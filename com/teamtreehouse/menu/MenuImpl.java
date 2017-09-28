@@ -27,8 +27,9 @@ public class MenuImpl implements MenuInterface {
                 "2. Add players to a team",
                 "3. Remove players from a team",
                 "4. View team report",
-                "5. View league balance report",
-                "6. Exit"
+                "5. View team roster",
+                "6. View league balance report",
+                "7. Exit"
         );
         for (String option : options) {
             System.out.println(option);
@@ -144,9 +145,19 @@ public class MenuImpl implements MenuInterface {
                 break;
 
             case 5:
+                System.out.println("Viewing team roster...");
+                // select team
+                this.league.displayTeams();
+                System.out.print("Enter team number: ");
+                teamIdx = Integer.parseInt(br.readLine()) - 1;
+                selectedTeam = this.league.getTeam(teamIdx);
+                selectedTeam.displayPlayers();
                 break;
 
             case 6:
+                break;
+
+            case 7:
                 System.out.println("Exiting program...");
                 break;
 
