@@ -60,36 +60,50 @@ public class Team implements Comparable{
 
     public void displayTeamReport() {
         // generate height-players map
-        Map<Integer, List<Player>> playersGroupedByHeight = new TreeMap<>();
+        Map<String, List<Player>> playersGroupedByHeight = new TreeMap<>();
+        // height ranges
+        playersGroupedByHeight.put("35-40", new ArrayList<>());
+        playersGroupedByHeight.put("41-46", new ArrayList<>());
+        playersGroupedByHeight.put("47-50", new ArrayList<>());
         for (Player player : this.players) {
-            Integer height = player.getHeightInInches();
-            List<Player> playerList = playersGroupedByHeight.get(height);
-            if (playerList == null) {
-                playersGroupedByHeight.put(height, new ArrayList<>());
+            int height = player.getHeightInInches();
+            if (height>=35 && height<=40) {
+                playersGroupedByHeight.get("35-40").add(player);
+            } else if (height>=41 && height<=46) {
+                playersGroupedByHeight.get("41-46").add(player);
+            } else if (height>=45 && height<=40) {
+                playersGroupedByHeight.get("35-40").add(player);
+            } else {
+                System.out.printf(
+                        "Player %s, %s has a height outside official ranges",
+                        player.getLastName(), player.getFirstName()
+                );
             }
-            playersGroupedByHeight.get(height).add(player);
         }
 
         // display team report
         System.out.println("Team Report (players grouped by height):");
-        System.out.println(String.join("", Collections.nCopies(62, "-")));
-        System.out.printf(
-                "%-26s|%-13s|%-20s%n",
-                "Player",
-                " Height(in.)",
-                " Previous Experience"
-        );
-        System.out.println(String.join("", Collections.nCopies(62, "-")));
-        // iterate through heights
-        for (Integer height : playersGroupedByHeight.keySet()) {
-            List<Player> playerList = playersGroupedByHeight.get(height);
+
+        // iterate through height ranges
+        for (String heightRange : playersGroupedByHeight.keySet()) {
+            List<Player> playerList = playersGroupedByHeight.get(heightRange);
+            int playerCount = playerList.size();
             int counter = 0;
-            // iterate through players with the same height
-            for (Player player : playerList) {
-                counter++;
-                System.out.printf("%03d. %s%n", counter, player);
+
+            // only print group if not empty
+            if (playerCount!=0) {
+                System.out.println(String.join("", Collections.nCopies(62, "-")));
+                System.out.printf("%s inches: %d player/s%n", heightRange, playerCount);
+                System.out.println(String.join("", Collections.nCopies(62, "-")));
+
+                // iterate through players with the same height
+                for (Player player : playerList) {
+                    counter++;
+                    System.out.printf("%03d. %s%n", counter, player);
+                }
+                System.out.println();
             }
-            System.out.println(String.join("", Collections.nCopies(62, "-")));
+
         }
     }
 
