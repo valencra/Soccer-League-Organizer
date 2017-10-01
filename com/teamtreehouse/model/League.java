@@ -21,7 +21,7 @@ public class League {
             team.calculateExperienceStatistics();
             System.out.printf("Experienced players: %d%n", team.getExperiencedCount());
             System.out.printf("Inexperienced players: %d%n", team.getInexperiencedCount());
-            System.out.printf("Percent experienced players: %3.2f %%%n", team.getPercentExperienced());
+            System.out.printf("Percent experienced players: %3.2f %%%n%n", team.getPercentExperienced());
         }
     }
 
