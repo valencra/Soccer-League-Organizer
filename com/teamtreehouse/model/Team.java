@@ -69,7 +69,7 @@ public class Team implements Comparable{
                 }
             }
             this.inexperiencedCount = this.players.size() - experiencedCount;
-            this.percentExperienced = (double) this.experiencedCount / (double) this.players.size();
+            this.percentExperienced = (double) this.experiencedCount / (double) this.players.size() * 100.00;
         }
 
     }
@@ -129,6 +129,13 @@ public class Team implements Comparable{
             if (playerCount!=0) {
                 System.out.println(String.join("", Collections.nCopies(62, "-")));
                 System.out.printf("%s inches: %d player/s%n", heightRange, playerCount);
+                System.out.println(String.join("", Collections.nCopies(62, "-")));
+                System.out.printf(
+                        "%-26s|%-13s|%-20s%n",
+                        "Player",
+                        " Height(in.)",
+                        " Previous Experience"
+                );
                 System.out.println(String.join("", Collections.nCopies(62, "-")));
 
                 // iterate through players with the same height
