@@ -19,9 +19,9 @@ public class League {
             System.out.printf("%03d. Team %s with coach %s%n", counter, team.getTeamName(), team.getCoach());
             System.out.println(String.join("", Collections.nCopies(58, "-")));
             team.calculateExperienceStatistics();
-            System.out.printf("Experienced players: %d", team.getExperiencedCount());
-            System.out.printf("Inexperienced players: %d", team.getInexperiencedCount());
-            System.out.printf("% experienced players: %.2f %%", team.getPercentExperienced());
+            System.out.printf("Experienced players: %d%n", team.getExperiencedCount());
+            System.out.printf("Inexperienced players: %d%n", team.getInexperiencedCount());
+            System.out.printf("Percent experienced players: %3.2f %%%n", team.getPercentExperienced());
         }
     }
 
