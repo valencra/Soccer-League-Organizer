@@ -11,6 +11,20 @@ public class League {
         this.availablePlayers = availablePlayers;
     }
 
+    public void displayLeagueBalanceReport() {
+        int counter = 0;
+        for (Team team : this.teams) {
+            counter++;
+            System.out.println(String.join("", Collections.nCopies(58, "-")));
+            System.out.printf("%03d. Team %s with coach %s%n", counter, team.getTeamName(), team.getCoach());
+            System.out.println(String.join("", Collections.nCopies(58, "-")));
+            team.calculateExperienceStatistics();
+            System.out.printf("Experienced players: %d", team.getExperiencedCount());
+            System.out.printf("Inexperienced players: %d", team.getInexperiencedCount());
+            System.out.printf("% experienced players: %.2f %%", team.getPercentExperienced());
+        }
+    }
+
     public void createNewTeam(String teamName, String coach) {
         Team team = new Team(teamName, coach);
         this.teams.add(team);

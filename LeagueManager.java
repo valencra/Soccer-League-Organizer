@@ -34,7 +34,7 @@ public class LeagueManager {
                 e.printStackTrace();
             }
 
-        } while (option != 4);
+        } while (option != 7);
 
     }
 

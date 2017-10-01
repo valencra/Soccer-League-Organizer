@@ -6,11 +6,17 @@ public class Team implements Comparable{
     private String teamName;
     private String coach;
     private List<Player> players;
+    private int experiencedCount;
+    private int inexperiencedCount;
+    private double percentExperienced;
 
     public Team(String teamName, String coach) {
         this.teamName = teamName;
         this.coach = coach;
         this.players = new ArrayList<Player>();
+        this.experiencedCount = 0;
+        this.inexperiencedCount = 0;
+        this.percentExperienced = 0.00;
     }
 
     public String getTeamName() {
@@ -29,6 +35,18 @@ public class Team implements Comparable{
         return this.players.get(playerIdx);
     }
 
+    public int getExperiencedCount() {
+        return experiencedCount;
+    }
+
+    public int getInexperiencedCount() {
+        return inexperiencedCount;
+    }
+
+    public double getPercentExperienced() {
+        return percentExperienced;
+    }
+
     public void addPlayer(Player player) {
         this.players.add(player);
         this.displayPlayers();
@@ -37,6 +55,23 @@ public class Team implements Comparable{
     public void removePlayer(int playerIdx) {
         this.players.remove(playerIdx);
         this.displayPlayers();
+    }
+
+    public void calculateExperienceStatistics() {
+        this.experiencedCount = 0;
+        this.inexperiencedCount = 0;
+        this.percentExperienced = 0.00;
+
+        if (this.players.size() != 0) {
+            for (Player player : this.players) {
+                if (player.isPreviousExperience()) {
+                    this.experiencedCount++;
+                }
+            }
+            this.inexperiencedCount = this.players.size() - experiencedCount;
+            this.percentExperienced = (double) this.experiencedCount / (double) this.players.size();
+        }
+
     }
 
     public void displayPlayers() {
@@ -71,8 +106,8 @@ public class Team implements Comparable{
                 playersGroupedByHeight.get("35-40").add(player);
             } else if (height>=41 && height<=46) {
                 playersGroupedByHeight.get("41-46").add(player);
-            } else if (height>=45 && height<=40) {
-                playersGroupedByHeight.get("35-40").add(player);
+            } else if (height>=47 && height<=50) {
+                playersGroupedByHeight.get("47-50").add(player);
             } else {
                 System.out.printf(
                         "Player %s, %s has a height outside official ranges",

@@ -155,6 +155,8 @@ public class MenuImpl implements MenuInterface {
                 break;
 
             case 6:
+                System.out.println("Viewing league balance report...");
+                this.league.displayLeagueBalanceReport();
                 break;
 
             case 7:
